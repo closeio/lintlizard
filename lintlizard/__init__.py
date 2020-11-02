@@ -1,5 +1,8 @@
 import subprocess
 
+__version__ = '0.0.1'
+
+
 TOOLS = [
     ['flake8', '--version'],
     ['flake8'],

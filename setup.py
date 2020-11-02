@@ -1,11 +1,18 @@
+import io
+import re
+
 import setuptools
+
+VERSION_FILE = "lintlizard/__init__.py"
+with io.open(VERSION_FILE, "rt", encoding="utf8") as f:
+    version = re.search(r'__version__ = ([\'"])(.*?)\1', f.read()).group(2)
 
 setuptools.setup(
     name="lintlizard",
-    version="0.0.1",
+    version=version,
     author="Vyacheslav Tverskoy",
     author_email="v@close.com",
-    description="A small example package",
+    description="Run various linters to ensure a common code quality baseline",
     url="https://github.com/closeio/lintlizard",
     packages=setuptools.find_packages(),
     install_requires=[
