@@ -3,7 +3,7 @@ from typing import Iterable, Tuple
 
 from attr import attrib, attrs
 
-__version__ = '0.0.3'
+__version__ = '0.0.4'
 
 
 @attrs(frozen=True)
