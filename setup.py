@@ -16,6 +16,7 @@ setuptools.setup(
     url="https://github.com/closeio/lintlizard",
     packages=setuptools.find_packages(),
     install_requires=[
+        'attrs',
         'black==20.8b1',
         'flake8==3.8.4',
         'flake8-bugbear==20.1.4',
