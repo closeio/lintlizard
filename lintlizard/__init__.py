@@ -41,7 +41,7 @@ TOOLS = [
 ]
 
 
-def execute_tools(fix: bool, files: Tuple[str]) -> Iterable[bool]:
+def execute_tools(fix: bool, files: Tuple[str, ...]) -> Iterable[bool]:
     tools = TOOLS
     if fix:
         tools = [tool for tool in tools if tool.fixable]
