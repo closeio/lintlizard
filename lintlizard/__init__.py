@@ -54,7 +54,9 @@ def execute_tools(fix: bool, files: Tuple[str, ...]) -> Iterable[bool]:
                 if fix and tool.fix_params is not None
                 else tool.run_command()
             )
-            subprocess.run(args=cmd + files, check=True)
+            if files and tool.allow_specify_files:
+                cmd = cmd + files
+            subprocess.run(args=cmd, check=True)
         except subprocess.CalledProcessError:
             yield False
         else:
@@ -77,19 +79,26 @@ def get_changed_files() -> Iterable[str]:
             ],
             stdout=subprocess.PIPE,
         )
-        return result.stdout.decode('utf8').strip().split('\n')
+        # if no files are changed, don't return ['']
+        return [
+            i for i in result.stdout.decode('utf8').strip().split('\n') if i
+        ]
     except subprocess.CalledProcessError:
         raise Exception('Error encountered when determining changed files.')
 
 
 def main() -> None:
     args = make_arg_parser().parse_args()
-    files = args.files or []
-    if args.changed:
-        files.extend(get_changed_files())
+    files = list(args.files) or []
 
-    if not files:
-        files = ['.']
+    if args.changed:
+        changed_files = get_changed_files()
+        if not changed_files and not files:
+            # ran as `lintlizard --changed` but nothing changed, don't run
+            # anything
+            return
+
+        files.extend(changed_files)
 
     tool_results = list(execute_tools(fix=args.fix, files=tuple(files)))
     if not all(tool_results):
