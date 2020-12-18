@@ -77,7 +77,7 @@ def get_changed_files() -> Iterable[str]:
             ],
             stdout=subprocess.PIPE,
         )
-        return result.stdout.decode('utf8').strip().split(' ')
+        return result.stdout.decode('utf8').strip().split('\n')
     except subprocess.CalledProcessError:
         raise Exception('Error encountered when determining changed files.')
 
