@@ -15,7 +15,10 @@ class CommandTool:
     executable: str = attrib()
     run_params: Command = attrib(default=())
     fix_params: Optional[Command] = attrib(default=None)
-    allow_specify_files: bool = attrib(default=True)
+
+    # if set, supports running with individually specified files.
+    # Otherwise, always runs without specifying files.
+    default_files: Optional[Command] = attrib(default=None)
 
     def run_command(self) -> Command:
         return (self.executable,) + self.run_params
@@ -35,9 +38,16 @@ class CommandTool:
 
 TOOLS = [
     CommandTool('flake8'),
-    CommandTool('isort', run_params=('-c',), fix_params=tuple()),
-    CommandTool('mypy', allow_specify_files=False),
-    CommandTool('black', run_params=('--check',), fix_params=tuple()),
+    CommandTool(
+        'isort', run_params=('-c',), fix_params=tuple(), default_files=('.',)
+    ),
+    CommandTool('mypy'),
+    CommandTool(
+        'black',
+        run_params=('--check',),
+        fix_params=tuple(),
+        default_files=('.',),
+    ),
 ]
 
 
@@ -54,8 +64,8 @@ def execute_tools(fix: bool, files: Tuple[str, ...]) -> Iterable[bool]:
                 if fix and tool.fix_params is not None
                 else tool.run_command()
             )
-            if files and tool.allow_specify_files:
-                cmd = cmd + files
+            if tool.default_files:
+                cmd = cmd + (files or tool.default_files)
             subprocess.run(args=cmd, check=True)
         except subprocess.CalledProcessError:
             yield False
