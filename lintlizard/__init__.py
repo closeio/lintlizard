@@ -37,7 +37,7 @@ class CommandTool:
 
 
 TOOLS = [
-    CommandTool('flake8'),
+    CommandTool('flake8', default_files=('.',)),
     CommandTool(
         'isort', run_params=('-c',), fix_params=tuple(), default_files=('.',)
     ),
