@@ -37,7 +37,7 @@ class CommandTool:
 
 
 TOOLS = [
-    CommandTool('flake8', default_files=('.',)),
+    CommandTool('flake8', default_files=()),
     CommandTool(
         'isort', run_params=('-c',), fix_params=tuple(), default_files=('.',)
     ),
@@ -64,7 +64,7 @@ def execute_tools(fix: bool, files: Tuple[str, ...]) -> Iterable[bool]:
                 if fix and tool.fix_params is not None
                 else tool.run_command()
             )
-            if tool.default_files:
+            if tool.default_files is not None:
                 cmd = cmd + (files or tool.default_files)
             subprocess.run(args=cmd, check=True)
         except subprocess.CalledProcessError:
