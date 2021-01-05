@@ -99,6 +99,10 @@ def get_changed_files() -> Iterable[str]:
 
 def main() -> None:
     args = make_arg_parser().parse_args()
+    if args.version:
+        print(f"lintlizard v{__version__}")
+        return
+
     files = list(args.files) or []
 
     if args.changed:
@@ -119,6 +123,7 @@ def make_arg_parser():
     parser = argparse.ArgumentParser()
     parser.add_argument('--fix', action='store_true')
     parser.add_argument('--changed', action='store_true')
+    parser.add_argument('--version', action='store_true')
     parser.add_argument('files', nargs='*', default=None)
 
     return parser
