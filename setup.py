@@ -18,7 +18,7 @@ setuptools.setup(
     install_requires=[
         'attrs',
         'black==20.8b1',
-        'flake8==3.8.4',
+        'flake8==3.9.0',
         'flake8-bugbear==21.3.2',
         'flake8-docstrings==1.5.0',
         'flake8-future-import==0.4.6',
@@ -32,9 +32,9 @@ setuptools.setup(
         'pathspec==0.8.1',
         'pep8==1.7.1',
         'pep8-naming==0.11.1',
-        'pycodestyle==2.6.0',
+        'pycodestyle==2.7.0',
         'pydocstyle==5.1.1',
-        'pyflakes==2.2.0',
+        'pyflakes==2.3.0',
         'snowballstemmer==2.1.0',
     ],
     classifiers=[
