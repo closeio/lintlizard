@@ -33,7 +33,7 @@ setuptools.setup(
         'pep8==1.7.1',
         'pep8-naming==0.11.1',
         'pycodestyle==2.7.0',
-        'pydocstyle==5.1.1',
+        'pydocstyle==6.0.0',
         'pyflakes==2.3.1',
         'snowballstemmer==2.1.0',
     ],
