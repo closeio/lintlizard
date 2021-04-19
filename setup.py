@@ -25,6 +25,7 @@ setuptools.setup(
         'flake8-no-u-prefixed-strings==0.2',
         'flake8-polyfill==1.0.2',
         'flake8-tidy-imports==4.2.1',
+        'flake8-simplify==0.14.0',
         'isort==5.8.0',
         'mccabe==0.6.1',
         'mypy==0.812',
