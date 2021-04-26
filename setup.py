@@ -17,7 +17,7 @@ setuptools.setup(
     packages=setuptools.find_packages(),
     install_requires=[
         'attrs',
-        'black==20.8b1',
+        'black==21.4b0',
         'flake8==3.9.1',
         'flake8-bugbear==21.4.3',
         'flake8-docstrings==1.6.0',
