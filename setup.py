@@ -28,7 +28,7 @@ setuptools.setup(
         'flake8-simplify==0.14.1',
         'isort==5.8.0',
         'mccabe==0.6.1',
-        'mypy==0.901',
+        'mypy==0.902',
         'mypy-extensions==0.4.3',
         'pathspec==0.8.1',
         'pep8==1.7.1',
