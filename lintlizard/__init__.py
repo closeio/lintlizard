@@ -39,13 +39,13 @@ class CommandTool:
 TOOLS = [
     CommandTool('flake8', default_files=()),
     CommandTool(
-        'isort', run_params=('-c',), fix_params=tuple(), default_files=('.',)
+        'isort', run_params=('-c',), fix_params=(), default_files=('.',)
     ),
     CommandTool('mypy'),
     CommandTool(
         'black',
         run_params=('--check',),
-        fix_params=tuple(),
+        fix_params=(),
         default_files=('.',),
     ),
 ]
