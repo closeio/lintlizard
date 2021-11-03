@@ -28,7 +28,7 @@ setuptools.setup(
         'flake8-tidy-imports==4.4.1',
         'flake8-sfs==0.0.3',
         'flake8-simplify==0.14.1',
-        'isort==5.9.3',
+        'isort==5.10.0',
         'mccabe==0.6.1',
         'mypy==0.910',
         'mypy-extensions==0.4.3',
