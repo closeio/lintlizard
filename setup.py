@@ -19,7 +19,7 @@ setuptools.setup(
         'attrs',
         'black==21.9b0',
         'flake8==3.9.2',
-        'flake8-bugbear==21.9.1',
+        'flake8-bugbear==21.11.29',
         'flake8-comprehensions==3.6.1',
         'flake8-docstrings==1.6.0',
         'flake8-future-import==0.4.6',
