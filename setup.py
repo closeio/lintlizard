@@ -37,7 +37,7 @@ setuptools.setup(
         'pep8-naming==0.12.1',
         'pycodestyle==2.7.0',
         'pydocstyle==6.1.1',
-        'pyflakes==2.3.1',
+        'pyflakes==2.4.0',
         'snowballstemmer==2.2.0',
     ],
     classifiers=[
