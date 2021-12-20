@@ -35,7 +35,7 @@ setuptools.setup(
         'pathspec==0.9.0',
         'pep8==1.7.1',
         'pep8-naming==0.12.1',
-        'pycodestyle==2.7.0',
+        'pycodestyle==2.8.0',
         'pydocstyle==6.1.1',
         'pyflakes==2.3.1',
         'snowballstemmer==2.2.0',
