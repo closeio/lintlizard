@@ -38,7 +38,7 @@ setuptools.setup(
         'pycodestyle==2.7.0',
         'pydocstyle==6.1.1',
         'pyflakes==2.3.1',
-        'snowballstemmer==2.1.0',
+        'snowballstemmer==2.2.0',
     ],
     classifiers=[
         'Intended Audience :: Developers',
