@@ -20,7 +20,7 @@ setuptools.setup(
         'black==22.3.0',
         'flake8==4.0.1',
         'flake8-bugbear==22.4.25',
-        'flake8-comprehensions==3.7.0',
+        'flake8-comprehensions==3.8.0',
         'flake8-docstrings==1.6.0',
         'flake8-future-import==0.4.6',
         'flake8-no-u-prefixed-strings==0.2',
