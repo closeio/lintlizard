@@ -48,11 +48,18 @@ TOOLS = [
     ),
     CommandTool('dmypy', run_params=('run',), ci_command=CommandTool('mypy')),
     CommandTool(
-        'black', run_params=('--check',), fix_params=(), default_files=('.',),
+        'black',
+        run_params=('--check',),
+        fix_params=(),
+        default_files=('.',),
     ),
-
     # Markdown source formatters
-    CommandTool('mdformat', run_params=('--check', '--number', '--wrap 60'))
+    CommandTool(
+        'mdformat',
+        run_params=('--check', '--number'),
+        fix_params=('--check',),
+        default_files=('.',),
+    ),
 ]
 
 
