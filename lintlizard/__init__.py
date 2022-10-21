@@ -13,6 +13,7 @@ Command = Tuple[str, ...]
 @attrs(frozen=True)
 class CommandTool:
     executable: str = attrib()
+    ci_command: Optional["CommandTool"] = attrib(default=None)
     run_params: Command = attrib(default=())
     fix_params: Optional[Command] = attrib(default=None)
 
@@ -20,7 +21,9 @@ class CommandTool:
     # Otherwise, always runs without specifying files.
     default_files: Optional[Command] = attrib(default=None)
 
-    def run_command(self) -> Command:
+    def run_command(self, ci: bool) -> Command:
+        if ci and self.ci_command is not None:
+            return self.ci_command.run_command(ci=False)
         return (self.executable,) + self.run_params
 
     @property
@@ -41,7 +44,7 @@ TOOLS = [
     CommandTool(
         'isort', run_params=('-c',), fix_params=(), default_files=('.',)
     ),
-    CommandTool('mypy'),
+    CommandTool('dmypy', run_params=('run',), ci_command=CommandTool('mypy')),
     CommandTool(
         'black',
         run_params=('--check',),
@@ -51,7 +54,9 @@ TOOLS = [
 ]
 
 
-def execute_tools(fix: bool, files: Tuple[str, ...]) -> Iterable[bool]:
+def execute_tools(
+    fix: bool, ci: bool, files: Tuple[str, ...]
+) -> Iterable[bool]:
     tools = TOOLS
     if fix:
         tools = [tool for tool in tools if tool.fixable]
@@ -62,7 +67,7 @@ def execute_tools(fix: bool, files: Tuple[str, ...]) -> Iterable[bool]:
             cmd = (
                 tool.fix_command()
                 if fix and tool.fix_params is not None
-                else tool.run_command()
+                else tool.run_command(ci=ci)
             )
             if tool.default_files is not None:
                 cmd = cmd + (files or tool.default_files)
@@ -114,13 +119,16 @@ def main() -> None:
 
         files.extend(changed_files)
 
-    tool_results = list(execute_tools(fix=args.fix, files=tuple(files)))
+    tool_results = list(
+        execute_tools(fix=args.fix, ci=args.ci, files=tuple(files))
+    )
     if not all(tool_results):
         exit(1)
 
 
 def make_arg_parser():
     parser = argparse.ArgumentParser()
+    parser.add_argument('--ci', action='store_true')
     parser.add_argument('--fix', action='store_true')
     parser.add_argument('--changed', action='store_true')
     parser.add_argument('--version', action='store_true')
