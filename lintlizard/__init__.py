@@ -4,7 +4,7 @@ from typing import Iterable, Optional, Tuple
 
 from attr import attrib, attrs
 
-__version__ = '0.21.0'
+__version__ = '0.22.0'
 
 
 Command = Tuple[str, ...]
