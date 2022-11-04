@@ -56,7 +56,7 @@ TOOLS = [
 
 def execute_tools(
     fix: bool, ci: bool, files: Tuple[str, ...]
-) -> Iterable[bool]:
+) -> Iterable[Tuple[str, bool]]:
     tools = TOOLS
     if fix:
         tools = [tool for tool in tools if tool.fixable]
@@ -73,9 +73,9 @@ def execute_tools(
                 cmd = cmd + (files or tool.default_files)
             subprocess.run(args=cmd, check=True)
         except subprocess.CalledProcessError:
-            yield False
+            yield tool.executable, False
         else:
-            yield True
+            yield tool.executable, True
 
 
 def get_changed_files() -> Iterable[str]:
@@ -119,11 +119,26 @@ def main() -> None:
 
         files.extend(changed_files)
 
-    tool_results = list(
-        execute_tools(fix=args.fix, ci=args.ci, files=tuple(files))
-    )
-    if not all(tool_results):
+    failed_tool_names = [
+        name
+        for name, result in execute_tools(
+            fix=args.fix, ci=args.ci, files=tuple(files)
+        )
+        if not result
+    ]
+
+    print("\n" + "*" * 79)
+    print("* Lintlizard summary")
+    print("*" * 79)
+
+    if failed_tool_names:
+        print(
+            "\033[0;31mThe following tools detected issues: "
+            f"{', '.join(failed_tool_names)}\033[0m"
+        )
         exit(1)
+
+    print("\033[0;92mAll tools finished successfully.\033[0m")
 
 
 def make_arg_parser():
