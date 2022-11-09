@@ -52,13 +52,6 @@ TOOLS = [
         fix_params=(),
         default_files=('.',),
     ),
-    # Markdown source formatters
-    CommandTool(
-        'mdformat',
-        run_params=('--check',),
-        fix_params=(),
-        default_files=('.',),
-    ),
 ]
 
 
