@@ -40,6 +40,7 @@ class CommandTool:
 
 
 TOOLS = [
+    # Python source formatters
     CommandTool('flake8', default_files=()),
     CommandTool(
         'isort', run_params=('-c',), fix_params=(), default_files=('.',)
@@ -47,6 +48,13 @@ TOOLS = [
     CommandTool('dmypy', run_params=('run',), ci_command=CommandTool('mypy')),
     CommandTool(
         'black',
+        run_params=('--check',),
+        fix_params=(),
+        default_files=('.',),
+    ),
+    # Markdown source formatters
+    CommandTool(
+        'mdformat',
         run_params=('--check',),
         fix_params=(),
         default_files=('.',),
