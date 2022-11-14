@@ -56,11 +56,14 @@ TOOLS = [
 
 
 def execute_tools(
-    fix: bool, ci: bool, files: Tuple[str, ...]
+    fix: bool, check: bool, ci: bool, files: Tuple[str, ...]
 ) -> Iterable[Tuple[str, bool]]:
-    tools = TOOLS
-    if fix:
+    # We need to run fixable tools first
+    tools = sorted(TOOLS, key=lambda tool: not tool.fixable)
+
+    if fix and not check:
         tools = [tool for tool in tools if tool.fixable]
+
     for tool in tools:
         print('*' * 79)
         try:
@@ -120,10 +123,13 @@ def main() -> None:
 
         files.extend(changed_files)
 
+    fix = args.fix or args.fix_and_check
+    check = not fix or args.fix_and_check
+
     failed_tool_names = [
         name
         for name, result in execute_tools(
-            fix=args.fix, ci=args.ci, files=tuple(files)
+            fix=fix, check=check, ci=args.ci, files=tuple(files)
         )
         if not result
     ]
@@ -145,7 +151,22 @@ def main() -> None:
 def make_arg_parser():
     parser = argparse.ArgumentParser()
     parser.add_argument('--ci', action='store_true')
-    parser.add_argument('--fix', action='store_true')
+
+    fix_group = parser.add_mutually_exclusive_group()
+    fix_group.add_argument(
+        '--fix',
+        action='store_true',
+        help=(
+            "Fix issues that can be fixed automatically. "
+            "Some code analysis will be omitted."
+        ),
+    )
+    fix_group.add_argument(
+        '--fix-and-check',
+        action='store_true',
+        help="Same as --fix, but also run a complete code analysis.",
+    )
+
     parser.add_argument('--changed', action='store_true')
     parser.add_argument('--version', action='store_true')
     parser.add_argument('files', nargs='*', default=None)
