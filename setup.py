@@ -49,7 +49,7 @@ setuptools.setup(
     python_requires='>=3.7',
     entry_points={
         'console_scripts': [
-            'lintlizard=lintlizard:main',
+            'lintlizard=lintlizard:main_fake',
         ],
     },
 )
