@@ -153,5 +153,9 @@ def make_arg_parser():
     return parser
 
 
+def main_fake():
+    pass
+
+
 if __name__ == '__main__':
-    main()
+    main_fake()
