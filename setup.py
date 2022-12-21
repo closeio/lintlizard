@@ -34,7 +34,7 @@ setuptools.setup(
         'mypy-extensions==0.4.3',
         'pathspec==0.10.1',
         'pep8==1.7.1',
-        'pep8-naming==0.13.2',
+        'pep8-naming==0.13.3',
         'pycodestyle==2.9.1',
         'pydocstyle==6.1.1',
         'pyflakes==2.5.0',
