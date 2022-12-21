@@ -32,7 +32,7 @@ setuptools.setup(
         'mdformat==0.7.16',
         'mypy==0.990',
         'mypy-extensions==0.4.3',
-        'pathspec==0.10.1',
+        'pathspec==0.10.3',
         'pep8==1.7.1',
         'pep8-naming==0.13.3',
         'pycodestyle==2.9.1',
