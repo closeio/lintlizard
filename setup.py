@@ -31,7 +31,7 @@ setuptools.setup(
         'mccabe==0.7.0',
         'mdformat==0.7.16',
         'mypy==1.2.0',
-        'mypy-extensions==0.4.3',
+        'mypy-extensions==1.0.0',
         'pathspec==0.10.3',
         'pep8==1.7.1',
         'pep8-naming==0.13.3',
