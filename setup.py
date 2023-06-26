@@ -30,7 +30,7 @@ setuptools.setup(
         'isort==5.11.3',
         'mccabe==0.7.0',
         'mdformat==0.7.16',
-        'mypy==0.990',
+        'mypy==1.4.1',
         'mypy-extensions==0.4.3',
         'pathspec==0.10.3',
         'pep8==1.7.1',
