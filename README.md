@@ -1,3 +1,10 @@
+# LintLizard is deprecated
+
+Since introduction of [`ruff`](https://github.com/astral-sh/ruff), we no longer need to maintain a consistently versioned bundle of plugins.
+
+
+---
+
 # LintLizard
 
 LintLizard helps maintaining great and consistent code quality across all Python-based projects at Close, making it easy to install and run exact same versions of code checking tools with a single command.
